@@ -3,7 +3,7 @@ import { useEffect } from "react";
 
 import type { NextPage } from "next";
 
-type Todo = {
+export type Todo = {
   createdAt: string;
   description: string;
   id: string;
@@ -12,7 +12,7 @@ type Todo = {
   updatedAt: string;
 };
 
-const GET_TODOS = gql`
+export const GET_TODOS = gql`
   query Todos {
     findAll {
       id
