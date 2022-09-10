@@ -1,0 +1,17 @@
+{
+  "extends": [
+    "stylelint-config-recess-order",
+    "stylelint-config-standard",
+    "stylelint-config-recommended-scss",
+    "stylelint-config-prettier"
+  ],
+  "rules": {
+    "scss/at-rule-no-unknown": [
+      true,
+      {
+        "ignoreAtRules": ["apply", "layer", "screen", "tailwind"]
+      }
+    ],
+    "selector-class-pattern": "^[a-z][a-zA-Z0-9-]+$"
+  }
+}
