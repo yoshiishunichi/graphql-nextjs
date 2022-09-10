@@ -13,7 +13,7 @@ type Todo = {
 };
 
 const GET_TODOS = gql`
-  query {
+  query Todos {
     findAll {
       id
       title
@@ -25,8 +25,22 @@ const GET_TODOS = gql`
   }
 `;
 
+const GET_TODO = gql`
+  query Todo($id: ID!) {
+    findOneById(id: $id) {
+      id
+      title
+      description
+    }
+  }
+`;
+
 const Home: NextPage = () => {
-  const { loading, error, data } = useQuery<{ findAll: Todo[] }>(GET_TODOS);
+  const { loading, error, data } = useQuery<{ findOneById: Todo }>(GET_TODO, {
+    variables: {
+      id: "id2す",
+    },
+  });
 
   useEffect(() => {
     console.log(data);
@@ -39,19 +53,7 @@ const Home: NextPage = () => {
       ) : error ? (
         <div>エラー</div>
       ) : data ? (
-        <div>
-          {data.findAll.map(({ id, title, description, createdAt, updatedAt, status }) => {
-            return (
-              <div className="mx-1 my-4 border-b border-black pb-1" key={id}>
-                <h1>{title}</h1>
-                <p>{description}</p>
-                <p>createdAt: {createdAt}</p>
-                <p>updatedAt: {updatedAt}</p>
-                <p>status: {status}</p>
-              </div>
-            );
-          })}
-        </div>
+        <div>データあり</div>
       ) : (
         <div>データなし</div>
       )}
